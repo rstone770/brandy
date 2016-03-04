@@ -1,0 +1,4 @@
+gulp/
+gulpfile.*
+source/
+tests/
