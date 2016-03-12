@@ -44,11 +44,11 @@ Container.prototype = {
         lifecycle = bindingOptions.lifecycle;
 
     if (typeof implementation !== 'function') {
-      throw new Error('Implementation must be a constructor.');
+      throw new TypeError('Implementation must be a constructor.');
     }
 
     if (dependencies.constructor !== Array) {
-      throw new Error('Dependencies must be an array.');
+      throw new TypeError('Dependencies must be an array.');
     }
 
     return this.factory(T, asFactory(implementation, slice.call(bindingOptions.dependencies)), lifecycle);

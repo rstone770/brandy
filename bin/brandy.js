@@ -53,11 +53,11 @@ Container.prototype = {
         lifecycle = bindingOptions.lifecycle;
 
     if (typeof implementation !== 'function') {
-      throw new Error('Implementation must be a constructor.');
+      throw new TypeError('Implementation must be a constructor.');
     }
 
     if (dependencies.constructor !== Array) {
-      throw new Error('Dependencies must be an array.');
+      throw new TypeError('Dependencies must be an array.');
     }
 
     return this.factory(T, asFactory(implementation, slice.call(bindingOptions.dependencies)), lifecycle);
@@ -284,25 +284,15 @@ var Lifecycle = {
    * @return {String}
    */
   parse: function (value) {
-    var result = null;
-
     if (typeof value == 'string') {
       var name = value.toUpperCase();
 
-      if (has.call(this, name) && typeof this[name] === 'string') {
-        if (this[name] === name) {
-          result = this[name];
-        } else {
-          result = this.parse(this[name]);
-        }
+      if (this[name] == name) {
+        return name;
       }
     }
 
-    if (result == null) {
-      throw new Error('Unable to parse ' + value + ' as Lifecycle.');
-    }
-
-    return result;
+    throw new Error('Unable to parse ' + value + ' as Lifecycle.');
   }
 };
 
