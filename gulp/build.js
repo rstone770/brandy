@@ -6,6 +6,7 @@ var concat = require('gulp-concat'),
     path = require('path'),
     rename = require('gulp-rename'),
     render = require('gulp-template'),
+    size = require('gulp-size'),
     uglify = require('gulp-uglify');
 
 /**
@@ -54,6 +55,7 @@ var register = function (config, gulp) {
       .pipe(uglify({ mangle: true, preserveComments: comment }))
       .pipe(rename(artifacts.release))
       .pipe(maps.write('./'))
+      .pipe(size({ showFiles: true, gzip: true }))
       .pipe(gulp.dest(config.bin));
 
     return stream;
