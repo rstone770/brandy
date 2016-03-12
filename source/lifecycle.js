@@ -38,8 +38,8 @@ var Lifecycle = {
     if (typeof value == 'string') {
       var name = value.toUpperCase();
 
-      if (this[name] == name) {
-        return name;
+      if (has.call(Lifecycle, name) && typeof Lifecycle[name] === 'string') {
+        return Lifecycle[name];
       }
     }
 

@@ -16,45 +16,51 @@ var Mapping = (function (root) {
    * dont support native maps.
    */
   var Mapping = function () {
-    this._keys = [];
-    this._values = [];
-  };
-
-  /**
-   * Map prototype.
-   */
-  Mapping.prototype = {
+    var keys = [],
+        values = [];
 
     /**
-     * Gets a single value from the map.
+     * Gets a value by key.
      *
-     * @param  {T} key
-     * @return {U}
+     * @param  {*} key
+     * @return {*}
      */
-    get: function (key) {
-      return this._values[this._keys.indexOf(key)];
-    },
+    var get = function (key) {
+      return values[keys.indexOf(key)];
+    };
 
     /**
-     * Sets a single value from the map.
+     * Sets a value by key.
      *
-     * @param  {T} key   [description]
-     * @param  {U} value [description]
-     * @return {Map}       [description]
+     * @param {*} key
+     * @param {*} value
+     * @return {Mapping}
      */
-    set: function (key, value) {
-      var index = this._keys.indexOf(key);
+    var set = function (key, value) {
+      var index = keys.indexOf(key);
 
       if (index === -1) {
-        this._keys.push(key);
-        this._values.push(value);
+        keys.push(key);
+        values.push(value);
       } else {
-        this._keys[index] = key;
-        this._values[index] = value;
+        keys[index] = key;
+        values[index] = value;
       }
 
-      return this;
-    }
+      return api;
+    };
+
+    /**
+     * Public api.
+     *
+     * @type {Object}
+     */
+    var api = {
+      get: get,
+      set: set
+    };
+
+    return api;
   };
 
   return NATIVE_MAP_SUPPORTED

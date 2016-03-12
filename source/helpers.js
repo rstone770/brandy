@@ -1,13 +1,13 @@
 /**
  * Creates a container compatible factory from a constructor of type T.
  *
- * @param  {T} T
+ * @param  {Function} constructor
  * @param  {Array} dependencies
  * @return {Function}
  */
-var asFactory = function (T, dependencies) {
+var asFactory = function (constructor, dependencies) {
   return function (container) {
-    return construct(T, dependencies.map(function (dependency) {
+    return construct(constructor, dependencies.map(function (dependency) {
       return container.instance(dependency);
     }));
   };
@@ -16,12 +16,12 @@ var asFactory = function (T, dependencies) {
 /**
  * Creates a new object from its constructor.
  *
- * @param  {T} T
+ * @param  {Function} constructor
  * @param  {Array=} params
- * @return {T}
+ * @return {Object}
  */
-var construct = function (T, params) {
-  return new (Function.bind.apply(T, [null].concat(params)))();
+var construct = function (constructor, params) {
+  return new (Function.bind.apply(constructor, [null].concat(params)))();
 };
 
 /**

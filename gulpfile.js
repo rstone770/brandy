@@ -7,7 +7,7 @@ var gulp = require('gulp'),
  *
  * @type {Array<String>}
  */
-var TASKS = ['build.js', 'lint.js'];
+var TASKS = ['build.js', 'lint.js', 'test.js'];
 
 TASKS.forEach(function (task) {
   require(path.join(config.tasks, task))(config, gulp);
