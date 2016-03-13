@@ -1,6 +1,6 @@
 {
   "name": "brandy",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A tiny IoC container.",
   "homepage": "http://www.github.com/rstone770/brandy",
   "main": "./bin/brandy.js",
