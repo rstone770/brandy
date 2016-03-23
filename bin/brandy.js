@@ -255,7 +255,7 @@ brandy.version = '0.0.1';
   } else if (typeof exports === 'object' && module.exports) {
     module.exports = factory;
   } else {
-    global.Brandy = brandy;
+    global.Brandy = factory;
   }
 })(global, brandy);
 
