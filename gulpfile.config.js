@@ -13,7 +13,14 @@ var config = {
    *
    * @type {String}
    */
-  bin: path.join(__dirname, './bin'),
+  bin: path.join(__dirname, 'bin'),
+
+  /**
+   * Main entry/export point of brandy.
+   *
+   * @type {String}
+   */
+  entry: 'index.js',
 
   /**
    * Package.json content.
@@ -27,21 +34,21 @@ var config = {
    *
    * @type {String}
    */
-  source: path.join(__dirname, './source'),
+  source: path.join(__dirname, 'source'),
 
   /**
    * Tasks path.
    *
    * @type {String}
    */
-  tasks: path.join(__dirname, './gulp'),
+  tasks: path.join(__dirname, 'gulp'),
 
   /**
    * Tests path.
    *
    * @type {String}
    */
-  tests: path.join(__dirname, './tests')
+  tests: path.join(__dirname, 'tests')
 };
 
 module.exports = config;

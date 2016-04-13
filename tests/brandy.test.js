@@ -16,6 +16,10 @@ describe('Brandy API', function () {
     expect(new Brandy()).to.not.equal(new Brandy());
   });
 
+  it('should expose a container instance.', function () {
+    expect(Brandy.container).to.be.a.container;
+  });
+
   it('should expose a version string.', function () {
     expect(Brandy.version).to.be.a.string;
   });

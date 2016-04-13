@@ -1,5 +1,5 @@
 /**!
- * brandy 0.0.1 - A tiny IoC container.
+ * brandy 0.1.1 - A tiny IoC container.
  * http://www.github.com/rstone770/brandy
  *
  * Licensed MIT
@@ -232,34 +232,6 @@ var slice = Array.prototype.slice;
 var has = Object.prototype.hasOwnProperty;
 
 /**
- * Brandy factory.
- *
- * @return {Container}
- */
-var brandy = function () {
-  return new Container(new Mapping());
-};
-
-/**
- * Brandy build version.
- *
- * @type {String}
- */
-brandy.version = '0.0.1';
-
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(function () {
-      return factory;
-    });
-  } else if (typeof exports === 'object' && module.exports) {
-    module.exports = factory;
-  } else {
-    global.Brandy = factory;
-  }
-})(global, brandy);
-
-/**
  * Describes possible object lifecycles.
  *
  * @enum {String}
@@ -377,4 +349,39 @@ var Mapping = (function (root) {
     ? global.Map
     : Mapping;
 })(global);
+
+/**
+ * Brandy factory.
+ *
+ * @return {Container}
+ */
+var brandy = function () {
+  return new Container(new Mapping());
+};
+
+/**
+ * Global container.
+ *
+ * @return {Container}
+ */
+brandy.container = brandy();
+
+/**
+ * Brandy build version.
+ *
+ * @type {String}
+ */
+brandy.version = '0.1.1';
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(function () {
+      return factory;
+    });
+  } else if (typeof exports === 'object' && module.exports) {
+    module.exports = factory;
+  } else {
+    global.Brandy = factory;
+  }
+})(global, brandy);
 }(this));

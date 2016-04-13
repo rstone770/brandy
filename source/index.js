@@ -8,6 +8,13 @@ var brandy = function () {
 };
 
 /**
+ * Global container.
+ *
+ * @return {Container}
+ */
+brandy.container = brandy();
+
+/**
  * Brandy build version.
  *
  * @type {String}

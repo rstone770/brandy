@@ -3,6 +3,7 @@ var concat = require('gulp-concat'),
     header = require('gulp-header'),
     iife = require('gulp-iife'),
     maps = require('gulp-sourcemaps'),
+    order = require('gulp-order'),
     path = require('path'),
     rename = require('gulp-rename'),
     render = require('gulp-template'),
@@ -42,6 +43,7 @@ var register = function (config, gulp) {
 
   gulp.task('build', function () {
     var stream = gulp.src(source)
+      .pipe(order([`!${config.entry}`]))
       .pipe(maps.init())
       .pipe(concat(artifacts.development))
       .pipe(iife({
