@@ -1,5 +1,4 @@
 {
   "reporter": "dot",
-  "ui": "bdd",
-  "require": ["./tests/setup.js"]
+  "ui": "bdd"
 }

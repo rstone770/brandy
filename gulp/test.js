@@ -1,28 +1,69 @@
 var ConfigLoader = require('rcloader'),
     mocha = require('gulp-mocha'),
-    path = require('path');
+    path = require('path'),
+    sequence = require('gulp-sequence');
 
 /**
- * Runtime config loader for mocha.
+ * Generates a testing task with a custom mocha profile.
  *
- * @type {ConfigLoader}
+ * @param {String} name
+ * @param {Object} overrides
  */
-var mocharc = new ConfigLoader('.mocharc');
+var generate = function (name, overrides) {
+
+  /**
+   * Runtime config loader for mocha.
+   *
+   * @type {ConfigLoader}
+   */
+  var mocharc = new ConfigLoader('.mocharc');
+
+  /**
+   * Register the testing task.
+   *
+   * @param  {Object} config
+   * @param  {Gulp} gulp
+   */
+  var register = function (config, gulp) {
+    var tests = path.join(config.tests, '**/*.test.js');
+
+    gulp.task(name, function () {
+      var mochaConfig = Object.assign({}, mocharc.for(config.tests), overrides);
+
+      return gulp.src(tests).pipe(mocha(mochaConfig));
+    });
+  };
+
+  return register;
+};
 
 /**
- * Register the testing task.
+ * Registers testing tasks tasks.
  *
- * @param  {Object} config
- * @param  {Gulp} gulp
+ * @param {Object} config
+ * @param {Gulp} gulp
  */
 var register = function (config, gulp) {
-  var tests = path.join(config.tests, '**/*.test.js');
+  var profiles = config.package.testingProfiles || {},
+      tasks = Object
+        .keys(profiles)
+        .map(function (profile) {
+          return {
+            name: ['test', profile].join(':'),
+            profile: profiles[profile]
+          };
+        });
 
-  gulp.task('test', function () {
-    var stream = gulp.src(tests)
-      .pipe(mocha(mocharc.for(config.test)));
+  gulp.task('test', function (done) {
+    sequence.apply(null, tasks.map(function (task) {
+      return task.name;
+    }).concat(done));
+  });
 
-    return stream;
+  tasks.map(function (task) {
+    return generate(task.name, task.profile);
+  }).forEach(function (register) {
+    register(config, gulp);
   });
 };
 

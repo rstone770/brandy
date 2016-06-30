@@ -44,9 +44,9 @@ var config = {
   tasks: path.join(__dirname, 'gulp'),
 
   /**
-   * Tests path.
+   * Test paths.
    *
-   * @type {String}
+   * @type {Object}
    */
   tests: path.join(__dirname, 'tests')
 };
