@@ -1,5 +1,5 @@
 /**!
- * brandy 0.1.1 - A tiny IoC container.
+ * brandy 0.2.1 - A tiny IoC container.
  * http://www.github.com/rstone770/brandy
  *
  * Licensed MIT
@@ -125,6 +125,39 @@ var Container = function (map) {
   };
 
   /**
+   * Determines the current keys in the container.
+   *
+   * @returns {object[]}
+   */
+  var keys = function () {
+    var keys = [];
+
+    map.forEach(function (value, key) {
+      keys.push(key);
+    });
+
+    return keys;
+  };
+
+  /**
+   * Determines the container size.
+   *
+   * @returns {Number}
+   */
+  var length = function () {
+    return map.size;
+  };
+
+  /**
+   * Returns a string object value of the container.
+   *
+   * @return {String}
+   */
+  var toString = function () {
+    return '[object Container]';
+  };
+
+  /**
    * Returns a singleton instance.
    *
    * @param  {Object} descriptor
@@ -170,8 +203,12 @@ var Container = function (map) {
   var api = {
     bind: bind,
     factory: factory,
-    instance: instance
+    instance: instance,
+    toString: toString
   };
+
+  getter(api, 'keys', keys);
+  getter(api, 'length', length);
 
   return api;
 };
@@ -230,6 +267,18 @@ var slice = Array.prototype.slice;
  * @type {Function}
  */
 var has = Object.prototype.hasOwnProperty;
+
+/**
+ * Defines a getter on an object.
+ *
+ * @param {Object} object
+ * @param {String} string
+ * @param {Function} getter
+ * @return {Object}
+ */
+var getter = function (object, property, getter) {
+  return Object.defineProperty(object, property, { get: getter });
+};
 
 /**
  * Describes possible object lifecycles.
@@ -302,6 +351,17 @@ var Mapping = (function (root) {
         values = [];
 
     /**
+     * Iterates over key value pairs.
+     *
+     * @param {Function} fn
+     */
+    var forEach = function (fn) {
+      keys.forEach(function (key, index) {
+        fn(values[index], key);
+      });
+    };
+
+    /**
      * Gets a value by key.
      *
      * @param  {*} key
@@ -333,14 +393,26 @@ var Mapping = (function (root) {
     };
 
     /**
+     * Determines the size of the mapping.
+     *
+     * @returns {Number}
+     */
+    var size = function () {
+      return keys.length;
+    };
+
+    /**
      * Public api.
      *
      * @type {Object}
      */
     var api = {
+      forEach: forEach,
       get: get,
       set: set
     };
+
+    getter(api, 'size', size);
 
     return api;
   };
@@ -371,7 +443,7 @@ brandy.container = brandy();
  *
  * @type {String}
  */
-brandy.version = '0.1.1';
+brandy.version = '0.2.1';
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {

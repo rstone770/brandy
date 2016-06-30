@@ -16,7 +16,7 @@ describe('Brandy#factory', function () {
     expect(throwMe).to.throw(TypeError);
   });
 
-  it ('should throw a TypeError exception on an invalid lifecycle type.', function () {
+  it('should throw a TypeError exception on an invalid lifecycle type.', function () {
     var throwMe = function () {
       brandy.factory('type', function () {}, {});
     };
@@ -24,7 +24,7 @@ describe('Brandy#factory', function () {
     expect(throwMe).to.throw(TypeError);
   });
 
-  it ('should throw a Error exception on invalid lifecycle value.', function () {
+  it('should throw a Error exception on invalid lifecycle value.', function () {
     var throwMe = function () {
       brandy.factory('type', function () {}, 'invalid lifecycle');
     };
@@ -32,7 +32,7 @@ describe('Brandy#factory', function () {
     expect(throwMe).to.throw(Error);
   });
 
-  it ('should register a well formed factory with no errors.', function () {
+  it('should register a well formed factory with no errors.', function () {
     brandy.factory({}, function () {});
     brandy.factory('type', function () {}, 'default');
     brandy.factory(['array'], function () {}, 'Transient');
@@ -40,9 +40,25 @@ describe('Brandy#factory', function () {
     brandy.factory(null, function () {}, 'SINGLETON');
   });
 
-  it ('should be chainable.', function () {
+  it('should be chainable.', function () {
     var actual = brandy.factory('type', function () {});
 
     expect(actual).to.equal(brandy);
+  });
+
+  it('should increment length.', function () {
+    brandy.factory('a', function () {});
+    brandy.factory('b', function () {});
+    brandy.factory('c', function () {});
+
+    expect(brandy.length).to.equal(3);
+  });
+
+  it('should be included keys.', function () {
+    brandy.factory('a', function () {});
+    brandy.factory('b', function () {});
+    brandy.factory('c', function () {});
+
+    expect(brandy.keys).to.eql(['a', 'b', 'c']);
   });
 });

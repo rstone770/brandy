@@ -52,3 +52,15 @@ var slice = Array.prototype.slice;
  * @type {Function}
  */
 var has = Object.prototype.hasOwnProperty;
+
+/**
+ * Defines a getter on an object.
+ *
+ * @param {Object} object
+ * @param {String} string
+ * @param {Function} getter
+ * @return {Object}
+ */
+var getter = function (object, property, getter) {
+  return Object.defineProperty(object, property, { get: getter });
+};

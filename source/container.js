@@ -116,6 +116,39 @@ var Container = function (map) {
   };
 
   /**
+   * Determines the current keys in the container.
+   *
+   * @returns {object[]}
+   */
+  var keys = function () {
+    var keys = [];
+
+    map.forEach(function (value, key) {
+      keys.push(key);
+    });
+
+    return keys;
+  };
+
+  /**
+   * Determines the container size.
+   *
+   * @returns {Number}
+   */
+  var length = function () {
+    return map.size;
+  };
+
+  /**
+   * Returns a string object value of the container.
+   *
+   * @return {String}
+   */
+  var toString = function () {
+    return '[object Container]';
+  };
+
+  /**
    * Returns a singleton instance.
    *
    * @param  {Object} descriptor
@@ -161,8 +194,12 @@ var Container = function (map) {
   var api = {
     bind: bind,
     factory: factory,
-    instance: instance
+    instance: instance,
+    toString: toString
   };
+
+  getter(api, 'keys', keys);
+  getter(api, 'length', length);
 
   return api;
 };

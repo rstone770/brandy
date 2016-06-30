@@ -20,6 +20,17 @@ var Mapping = (function (root) {
         values = [];
 
     /**
+     * Iterates over key value pairs.
+     *
+     * @param {Function} fn
+     */
+    var forEach = function (fn) {
+      keys.forEach(function (key, index) {
+        fn(values[index], key);
+      });
+    };
+
+    /**
      * Gets a value by key.
      *
      * @param  {*} key
@@ -51,14 +62,26 @@ var Mapping = (function (root) {
     };
 
     /**
+     * Determines the size of the mapping.
+     *
+     * @returns {Number}
+     */
+    var size = function () {
+      return keys.length;
+    };
+
+    /**
      * Public api.
      *
      * @type {Object}
      */
     var api = {
+      forEach: forEach,
       get: get,
       set: set
     };
+
+    getter(api, 'size', size);
 
     return api;
   };
