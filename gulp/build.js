@@ -37,8 +37,8 @@ var comment = function (node, comment) {
 var register = function (config, gulp) {
   var source = path.join(config.source, '*.js'),
       artifacts = {
-        development: `${config.package.name}.js`,
-        release: `${config.package.name}.min.js`
+        development: `${config.package.displayName}.js`,
+        release: `${config.package.displayName}.min.js`
       };
 
   gulp.task('build', function () {

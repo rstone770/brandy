@@ -1,5 +1,5 @@
 /**!
- * brandy 0.2.1 - A tiny IoC container.
+ * brandy 1.0.0 - A tiny IoC container.
  * http://www.github.com/rstone770/brandy
  *
  * Licensed MIT
@@ -443,7 +443,7 @@ brandy.container = brandy();
  *
  * @type {String}
  */
-brandy.version = '0.2.1';
+brandy.version = '1.0.0';
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
