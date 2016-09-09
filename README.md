@@ -3,6 +3,9 @@ Brandy
 
 A cute, smart, and expendable IOC container for javascript.
 
+[![Build Status](https://travis-ci.org/rstone770/brandy.svg?branch=master)](https://travis-ci.org/rstone770/brandy)
+[![npm (scoped)](https://img.shields.io/npm/v/@rstone770/brandy.svg?maxAge=2592000)](https://www.npmjs.com/package/@rstone770/brandy)
+
 ```
 npm install @rstone770/brandy
 ```
