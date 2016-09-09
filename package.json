@@ -1,9 +1,9 @@
 {
   "name": "@rstone770/brandy",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A tiny, ultra extendable IoC container.",
   "homepage": "http://www.github.com/rstone770/brandy",
-  "main": "./bin/brandy.js",
+  "main": "./dist/brandy.js",
   "scripts": {
     "all": "npm run lint test bundle",
     "bundle": "node ./node_modules/gulp/bin/gulp bundle",
@@ -11,7 +11,7 @@
     "test": "node ./node_modules/gulp/bin/gulp test",
     "prepublish": "npm run bundle"
   },
-  "file": [
+  "files": [
     "dist",
     "LICENSE"
   ],
