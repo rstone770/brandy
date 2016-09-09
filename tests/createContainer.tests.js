@@ -38,12 +38,12 @@ describe('createContainer', () => {
     ).to.not.throw();
 
     expect(
-      () => createContainer(() => {})
+      () => createContainer(() => () => {})
     ).to.not.throw();
   });
 
   it('passes in createContainer to enhancer', () => {
-    const enhancer = spy();
+    const enhancer = spy(() => () => {});
 
     createContainer(enhancer);
     expect(enhancer).to.be.called.exactly(1);
@@ -54,7 +54,7 @@ describe('createContainer', () => {
     const newAPI = {};
 
     expect(
-      createContainer(() => newAPI)
+      createContainer(() => () => newAPI)
     ).to.equal(newAPI);
   });
 

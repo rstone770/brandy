@@ -57,7 +57,7 @@ export default function createContainer (enhancer) {
       throw new TypeError('enhancer must be a function.');
     }
 
-    return enhancer(createContainer);
+    return enhancer(createContainer)();
   }
 
   /**
