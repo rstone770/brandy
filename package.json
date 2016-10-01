@@ -1,6 +1,6 @@
 {
   "name": "@rstone770/brandy",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "A tiny, ultra extendable IoC container.",
   "homepage": "http://www.github.com/rstone770/brandy",
   "main": "./dist/brandy.js",
